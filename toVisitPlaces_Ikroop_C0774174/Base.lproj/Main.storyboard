@@ -40,7 +40,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorite places" id="GqY-8V-ONz">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="ogp-iq-aYi"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="ogp-iq-aYi">
+                            <connections>
+                                <segue destination="I9d-wt-45M" kind="show" id="LpN-h4-PWp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="5gp-Og-Ke9" id="79y-JE-jBH"/>
@@ -49,6 +53,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="116.51785714285714"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="F0F-bQ-raZ">
+            <objects>
+                <viewController title="Map View Controller" id="I9d-wt-45M" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lBj-iQ-rMt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Hcc-mu-yfR">
+                                <rect key="frame" x="20" y="44" width="374" height="692"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Hcc-mu-yfR" firstAttribute="leading" secondItem="78E-vO-Bhe" secondAttribute="leading" constant="20" id="7TT-oj-R1w"/>
+                            <constraint firstItem="78E-vO-Bhe" firstAttribute="bottom" secondItem="Hcc-mu-yfR" secondAttribute="bottom" id="C1D-xx-QaQ"/>
+                            <constraint firstItem="Hcc-mu-yfR" firstAttribute="top" secondItem="78E-vO-Bhe" secondAttribute="top" id="PJE-ld-A0v"/>
+                            <constraint firstItem="78E-vO-Bhe" firstAttribute="trailing" secondItem="Hcc-mu-yfR" secondAttribute="trailing" constant="20" id="utu-Bm-sOL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="78E-vO-Bhe"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zbX-gj-wje"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KKf-DY-wIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1891" y="111"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lrk-l4-NoC">
