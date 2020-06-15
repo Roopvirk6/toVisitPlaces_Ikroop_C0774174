@@ -82,6 +82,9 @@
                         <viewLayoutGuide key="safeArea" id="78E-vO-Bhe"/>
                     </view>
                     <navigationItem key="navigationItem" id="zbX-gj-wje"/>
+                    <connections>
+                        <outlet property="mapView" destination="Hcc-mu-yfR" id="7tt-s6-VAM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKf-DY-wIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
