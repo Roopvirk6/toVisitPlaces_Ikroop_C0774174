@@ -5,10 +5,10 @@
 //  Created by VirkIkroop on 2020-06-15.
 //  Copyright © 2020 VirkIkroop. All rights reserved.
 //
-
+import MapKit
 import UIKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate  {
 
     override func viewDidLoad() {
         super.viewDidLoad()
