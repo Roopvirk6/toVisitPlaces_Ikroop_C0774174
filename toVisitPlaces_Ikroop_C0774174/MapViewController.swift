@@ -21,10 +21,14 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDe
         let destCoordinate = MKDirections.Request()
         let button = UIButton()
         var places:[Places]?
+        let defaults = UserDefaults.standard
+        var lat : Double = 0.0
+        var long : Double = 0.0
+        var drag : Bool? = false
         
-    //    var address =
+   
         
-        var favPlace: CLLocation?
+        
 
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -43,10 +47,26 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDe
             let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
                    tap.numberOfTapsRequired = 2
                    mapView.addGestureRecognizer(tap)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(saveData), name: UIApplication.willResignActiveNotification, object: nil)
+            
             loadData()
             
             
         }
+    
+    func dragablePin(){
+        self.lat = defaults.double(forKey: "latitude")
+        self.long = defaults.double(forKey: "longitude")
+        
+        self.drag = defaults.bool(forKey: "bool")
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long )
+        print(lat, long)
+        mapView.addAnnotation(annotation)
+    }
+    
         
         
         
@@ -227,16 +247,13 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDe
                 
                 let place = Places(placeLat: self.destinationCoordinates.latitude, placeLong:self.destinationCoordinates.longitude, placeName: placeName, city: city, postalCode: postalCode, country: country)
               
-    //          print(placeName ,city, state, postalCode , country, self.destinationCoordinates.latitude, self.destinationCoordinates.longitude)
+    
+              
                 self.places?.append(place)
+                self.saveData()
+                self.navigationController?.popToRootViewController(animated: true)
 
-    //
-    //                print("name:", placemark.name ?? "unknown")
-    //                print("neighborhood:", placemark.subLocality ?? "unknown")
-    //                print("city:", placemark.locality ?? "unknown")
-    //                print("state:", placemark.administrativeArea ?? "unknown")
-    //                print("zip code:", placemark.postalCode ?? "unknown")
-    //                print("country:", placemark.country ?? "unknown", terminator: "\n\n")
+                   
                 
                 
                    
@@ -273,7 +290,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDe
         
         func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
              let alertController = UIAlertController(title: "Add to Favourites", message:
-                "Do you want to add marked Location to favourites?", preferredStyle: .actionSheet)
+                "Do you like to add Location to favourites?", preferredStyle: .actionSheet)
             alertController.addAction(UIAlertAction(title: "Yes", style:  .default, handler: { (UIAlertAction) in
                 self.geocode()
                 
