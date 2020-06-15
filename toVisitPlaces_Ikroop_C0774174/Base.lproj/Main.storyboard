@@ -57,7 +57,7 @@
         <!--Map View Controller-->
         <scene sceneID="F0F-bQ-raZ">
             <objects>
-                <viewController title="Map View Controller" id="I9d-wt-45M" sceneMemberID="viewController">
+                <viewController title="Map View Controller" id="I9d-wt-45M" customClass="MapViewController" customModule="toVisitPlaces_Ikroop_C0774174" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lBj-iQ-rMt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
