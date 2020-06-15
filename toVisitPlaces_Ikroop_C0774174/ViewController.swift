@@ -16,6 +16,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     var data = ["CN Tower", "Toronto eye","canada wonderland","orangevile"]
     
+    var places : [Places]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -28,6 +30,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+      //  let place = places![indexPath.row]
        // let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)
         let cell = UITableViewCell()
         cell.textLabel?.text = data[indexPath.row]

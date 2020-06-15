@@ -5,21 +5,24 @@
 //  Created by VirkIkroop on 2020-06-15.
 //  Copyright © 2020 VirkIkroop. All rights reserved.
 //
-import MapKit
+
 import UIKit
+import MapKit
+
 
 class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate  {
     
     
     @IBOutlet weak var mapView: MKMapView!
     
-    var locationManager = CLLocationManager()
+    
+        var locationManager = CLLocationManager()
         var destinationCoordinates : CLLocationCoordinate2D!
         let destCoordinate = MKDirections.Request()
         let button = UIButton()
-       // var places:[Places]?
+        var places:[Places]?
         
-   
+    //    var address =
         
         var favPlace: CLLocation?
 
@@ -27,22 +30,78 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDe
             super.viewDidLoad()
             // Do any additional setup after loading the view.
             
+        
+            
             mapView.isZoomEnabled = false
             mapView.delegate = self
+            mapView.showsUserLocation = true
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
+             locationManager.distanceFilter = kCLDistanceFilterNone
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
             let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
                    tap.numberOfTapsRequired = 2
                    mapView.addGestureRecognizer(tap)
-           
+            loadData()
             
             
         }
         
         
         
+        func getDataFilePath() -> String {
+               let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+               let filePath = documentPath.appending("/places-data.txt")
+               return filePath
+           }
+        
+        func loadData() {
+            places = [Places]()
+            
+            let filePath = getDataFilePath()
+            
+            if FileManager.default.fileExists(atPath: filePath){
+                do{
+                    //creating string of file path
+                 let fileContent = try String(contentsOfFile: filePath)
+                    
+                    let contentArray = fileContent.components(separatedBy: "\n")
+                    for content in contentArray{
+                       
+                        let placeContent = content.components(separatedBy: ",")
+                        if placeContent.count == 6 {
+                           let place = Places(placeLat: Double(placeContent[0])!, placeLong: Double(placeContent[1])!, placeName: placeContent[2], city: placeContent[3], postalCode: placeContent[4], country: placeContent[5])
+                            places?.append(place)
+                        }
+                    }
+                }
+                catch{
+                    print(error)
+                }
+            }
+        }
+        
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+             if let tableViewCell = segue.destination as? ViewController{
+                 tableViewCell.places = self.places
+             }
+         }
+         
+        @objc func saveData() {
+             let filePath = getDataFilePath()
+
+             var saveString = ""
+             for place in places!{
+                saveString = "\(saveString)\(place.placeLat) \(place.placeLong) \(place.placeName) \(place.city) \(place.country) \(place.postalCode)\n"
+                 do{
+                try saveString.write(toFile: filePath, atomically: true, encoding: .utf8)
+                 }
+                 catch{
+                     print(error)
+                 }
+             }
+         }
         
          @objc func handleTap(recognizer: UITapGestureRecognizer) {
                 
@@ -61,10 +120,13 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDe
                         self.mapView.addAnnotation(annotation)
                    }
                }
-
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
                    let userLocation = locations[0]
-                   
                    let latitude = userLocation.coordinate.latitude
                    let longitude = userLocation.coordinate.longitude
                     
@@ -79,13 +141,17 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDe
                     // 4 - assign region to map
                    mapView.setRegion(region, animated: true)
                 }
-
+    
+    
+    
+    
+    @IBAction func locBtn(_ sender: UIButton) {
         
-    @IBAction func locationBtn(_ sender: Any) {
         getRoute()
     }
     
-           func getRoute() {
+       
+        func getRoute() {
               
                       let sourceCoordinate = mapView.userLocation.coordinate
                       
@@ -121,10 +187,66 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDe
                          
                       }
            }
-    
+        
+        func geocode()  {
+            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: destinationCoordinates.latitude, longitude: destinationCoordinates.longitude)) {  placemark, error in
+               if let error = error as? CLError {
+                   print("CLError:", error)
+                   return
+                }
+               else if let placemark = placemark?[0] {
                 
-    
-               
+                var placeName = ""
+                var neighbourhood = ""
+                var city = ""
+                var state = ""
+                var postalCode = ""
+                var country = ""
+                
+                
+                if let name = placemark.name {
+                    placeName += name
+                            }
+                if let sublocality = placemark.subLocality {
+                    neighbourhood += sublocality
+                            }
+                if let locality = placemark.subLocality {
+                     city += locality
+                            }
+                if let area = placemark.administrativeArea {
+                              state += area
+                          }
+                if let code = placemark.postalCode {
+                              postalCode += code
+                          }
+                if let cntry = placemark.country {
+                                        country += cntry
+                                    }
+    //          print(placeName ,city, state, postalCode , country)
+                
+                
+                let place = Places(placeLat: self.destinationCoordinates.latitude, placeLong:self.destinationCoordinates.longitude, placeName: placeName, city: city, postalCode: postalCode, country: country)
+              
+    //          print(placeName ,city, state, postalCode , country, self.destinationCoordinates.latitude, self.destinationCoordinates.longitude)
+                self.places?.append(place)
+
+    //
+    //                print("name:", placemark.name ?? "unknown")
+    //                print("neighborhood:", placemark.subLocality ?? "unknown")
+    //                print("city:", placemark.locality ?? "unknown")
+    //                print("state:", placemark.administrativeArea ?? "unknown")
+    //                print("zip code:", placemark.postalCode ?? "unknown")
+    //                print("country:", placemark.country ?? "unknown", terminator: "\n\n")
+                
+                
+                   
+                }
+            
+            }
+        }
+        
+      
+        
        
     }
 
@@ -183,15 +305,14 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDe
     }
 
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
+   
+    
+    
+            
+        
+        
+        
+         
+        
+        
+    

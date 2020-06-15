@@ -16,6 +16,7 @@
 		1A7238022497275F00C7D84B /* toVisitPlaces_Ikroop_C0774174Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7238012497275F00C7D84B /* toVisitPlaces_Ikroop_C0774174Tests.swift */; };
 		1A72380D2497275F00C7D84B /* toVisitPlaces_Ikroop_C0774174UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A72380C2497275F00C7D84B /* toVisitPlaces_Ikroop_C0774174UITests.swift */; };
 		1A72381B24973F7600C7D84B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A72381A24973F7600C7D84B /* MapViewController.swift */; };
+		1A72381F2497CF0F00C7D84B /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A72381E2497CF0F00C7D84B /* Places.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		1A72380C2497275F00C7D84B /* toVisitPlaces_Ikroop_C0774174UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toVisitPlaces_Ikroop_C0774174UITests.swift; sourceTree = "<group>"; };
 		1A72380E2497275F00C7D84B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A72381A24973F7600C7D84B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1A72381E2497CF0F00C7D84B /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				1A7237F52497275E00C7D84B /* LaunchScreen.storyboard */,
 				1A7237F82497275E00C7D84B /* Info.plist */,
 				1A72381A24973F7600C7D84B /* MapViewController.swift */,
+				1A72381E2497CF0F00C7D84B /* Places.swift */,
 			);
 			path = toVisitPlaces_Ikroop_C0774174;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A72381F2497CF0F00C7D84B /* Places.swift in Sources */,
 				1A7237EF2497275D00C7D84B /* ViewController.swift in Sources */,
 				1A7237EB2497275D00C7D84B /* AppDelegate.swift in Sources */,
 				1A7237ED2497275D00C7D84B /* SceneDelegate.swift in Sources */,

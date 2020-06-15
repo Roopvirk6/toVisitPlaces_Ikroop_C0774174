@@ -69,7 +69,7 @@
                                 <rect key="frame" x="327" y="696" width="57" height="30"/>
                                 <state key="normal" image="paperplane.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="locationBtn:" destination="I9d-wt-45M" eventType="touchUpInside" id="fe3-0t-Rqj"/>
+                                    <action selector="locBtn:" destination="I9d-wt-45M" eventType="touchUpInside" id="gOU-mh-Tor"/>
                                 </connections>
                             </button>
                         </subviews>
