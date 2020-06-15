@@ -65,8 +65,8 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Hcc-mu-yfR">
                                 <rect key="frame" x="20" y="44" width="374" height="692"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHr-o1-uD4">
-                                <rect key="frame" x="363" y="704" width="21" height="22"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHr-o1-uD4">
+                                <rect key="frame" x="327" y="696" width="57" height="30"/>
                                 <state key="normal" image="paperplane.fill" catalog="system"/>
                             </button>
                         </subviews>
@@ -85,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKf-DY-wIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1891" y="111"/>
+            <point key="canvasLocation" x="1889.8550724637682" y="110.86956521739131"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lrk-l4-NoC">
